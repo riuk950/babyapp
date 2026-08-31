@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'features/clothing/presentation/clothing_page.dart';
-import 'features/clothing/presentation/l10n/app_localizations.dart';
+import 'features/sleep/presentation/l10n/app_localizations.dart';
+import 'features/sleep/presentation/sleep_controller.dart';
+import 'features/sleep/presentation/sleep_page.dart';
 
 void main() {
   runApp(const BabyApp());
@@ -13,19 +14,19 @@ class BabyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Cómo vestir al bebé',
+      title: 'Cuánto debe dormir tu hijo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
         useMaterial3: true,
         appBarTheme: const AppBarTheme(
-          backgroundColor: Colors.teal,
+          backgroundColor: Colors.indigo,
           foregroundColor: Colors.white,
         ),
       ),
       locale: const Locale('es'),
       supportedLocales: AppLocalizations.supportedLocales,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
-      home: const ClothingPage(),
+      home: SleepPage(controller: SleepController()),
     );
   }
 }

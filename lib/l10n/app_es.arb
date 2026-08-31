@@ -16,5 +16,14 @@
   "loadingWeather": "Obteniendo el clima…",
   "recommendationTitle": "Recomendación",
   "extremeCold": "Temperatura muy baja: abriga bien al bebé.",
-  "extremeHeat": "Temperatura muy alta: mantén al bebé fresco."
+  "extremeHeat": "Temperatura muy alta: mantén al bebé fresco.",
+
+  "sleepAppTitle": "Cuánto debe dormir tu hijo",
+  "sleepSelectPrompt": "Elige la franja de edad del bebé",
+  "sleepAgeBandNone": "Ninguna seleccionada",
+  "sleepTotalHoursTitle": "Horas totales por día",
+  "sleepNapsTitle": "Siestas",
+  "sleepBedtimeTitle": "Horario orientativo",
+  "sleepInsufficientSignsTitle": "Señales de sueño insuficiente",
+  "sleepAlarmSignsTitle": "Cuándo consultar al pediatra"
 }
