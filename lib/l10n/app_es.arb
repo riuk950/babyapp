@@ -39,5 +39,9 @@
   "milestonesSearchNoResults": "No hay meses que coincidan con tu búsqueda",
   "milestonesNewMilestonesTitle": "Hitos nuevos",
   "milestonesPreviousHitLabel": "Último hito alcanzado",
-  "milestonesAlarmSignsTitle": "Señales de alarma"
+  "milestonesAlarmSignsTitle": "Señales de alarma",
+
+  "alertsAppTitle": "Señales de alerta",
+  "alertsSelectPrompt": "Elige la franja de edad del bebé",
+  "alertsAgeBandNone": "Ninguna seleccionada"
 }

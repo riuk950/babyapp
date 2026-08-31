@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'features/milestones/presentation/l10n/app_localizations.dart';
-import 'features/milestones/presentation/milestone_controller.dart';
-import 'features/milestones/presentation/milestone_page.dart';
+import 'features/alerts/presentation/alert_controller.dart';
+import 'features/alerts/presentation/alert_page.dart';
+import 'features/alerts/presentation/l10n/app_localizations.dart';
 
 void main() {
   runApp(const BabyApp());
@@ -26,7 +26,7 @@ class BabyApp extends StatelessWidget {
       locale: const Locale('es'),
       supportedLocales: AppLocalizations.supportedLocales,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
-      home: MilestonePage(controller: MilestoneController()),
+      home: AlertPage(controller: AlertController()),
     );
   }
 }
