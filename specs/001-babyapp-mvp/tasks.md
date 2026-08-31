@@ -7,12 +7,12 @@ mensajes de usuario en español (§6). Nada en `core/domain/` importa Flutter
 
 ## Fase 0 — Base
 
-- [ ] T1. Añadir dependencias aprobadas
+- [x] T1. Añadir dependencias aprobadas
       RF: RF-2, RF-4 · plan §1
       Hecho cuando: `pubspec.yaml` incluye `http` y `geolocator`, y
       `flutter pub get` sale con exit 0.
 
-- [ ] T2. Definir tipos de dominio en `core/domain/`
+- [x] T2. Definir tipos de dominio en `core/domain/`
       RF: RF-6, RF-7, RF-8 · plan §2 (`core/domain/models.dart`)
       Hecho cuando: existen `AgeBand`, `ManualInputResult`,
       `TemperatureReading`, `EffectiveTemperature`, `NoticeType`,
