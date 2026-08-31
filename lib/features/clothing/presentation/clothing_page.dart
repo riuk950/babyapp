@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/domain/contracts/weather_repository.dart';
 import '../../../core/domain/models.dart';
 import '../../../core/data/geo/geolocator_service.dart';
 import '../../../core/data/weather/open_meteo.dart';
@@ -10,9 +11,12 @@ import 'l10n/app_localizations.dart';
 /// Clothing screen (RF-1..RF-8 · RNF-2, RNF-5, §6).
 ///
 /// Renders the UI and captures user events only; all business logic is
-/// delegated to the [ClothingController] (constitution §3C).
+/// delegated to the [ClothingController] (constitution §3C). A [repository]
+/// may be injected for testing; otherwise the real weather source is used.
 class ClothingPage extends StatefulWidget {
-  const ClothingPage({super.key});
+  const ClothingPage({super.key, this.repository});
+
+  final WeatherRepository? repository;
 
   @override
   State<ClothingPage> createState() => _ClothingPageState();
@@ -27,10 +31,11 @@ class _ClothingPageState extends State<ClothingPage> {
   void initState() {
     super.initState();
     _controller = ClothingController(
-      weatherRepository: WeatherRepositoryImpl(
-        geoRepository: const GeolocatorService(),
-        api: OpenMeteoApi(),
-      ),
+      weatherRepository: widget.repository ??
+          WeatherRepositoryImpl(
+            geoRepository: const GeolocatorService(),
+            api: OpenMeteoApi(),
+          ),
     );
     _lifecycleListener = AppLifecycleListener(
       onResume: _controller.onResume,
@@ -124,7 +129,7 @@ class _ClothingPageState extends State<ClothingPage> {
           child: CircularProgressIndicator(strokeWidth: 2),
         ),
         const SizedBox(width: 10),
-        Text(l10n.loadingWeather),
+        Expanded(child: Text(l10n.loadingWeather)),
       ],
     );
   }

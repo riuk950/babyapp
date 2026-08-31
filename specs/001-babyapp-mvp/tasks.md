@@ -102,13 +102,13 @@ mensajes de usuario en español (§6). Nada en `core/domain/` importa Flutter
 
 ## Fase 4 — Verificación
 
-- [ ] T16. Widget test de la pantalla
+- [x] T16. Widget test de la pantalla
       RF: RF-7, RF-8 · RNF-2 · §6 · plan §6
       Hecho cuando: el widget test verifica recomendación, aviso sin
       reemplazarla, errores RF-1 y layout ≥320 dp con textos vía l10n en
       español.
 
-- [ ] T17. Gate final
+- [x] T17. Gate final
       RF: todos · §4 · plan §4
       Hecho cuando: `flutter pub get && flutter analyze && flutter test`
       devuelven 0/0/0 y toda la cobertura de RF del plan §7 está verde.
