@@ -6,12 +6,12 @@ que cubre y una línea "Hecho cuando:" verificable. Base: `spec.md` (RF/CL) y
 
 ## Fase A — Lógica pura en `core/domain/`
 
-- [ ] **T-1** Confirmar `core/domain/age/age_band.dart` compartido (franjas
+- [x] **T-1** Confirmar `core/domain/age/age_band.dart` compartido (franjas
   [0,3)[3,12)[12,36)[36,60]) y su test. Cubre: RF-2, CL-3.
   - Hecho cuando: `age_band_test.dart` en verde con límites iguales a
     001/002/004/005/006 (pertenencia en 0, 3, 12, 36, 60 meses).
 
-- [ ] **T-2** Definir `EmergencyType` (enum de 12 situaciones de emergencia con
+- [x] **T-2** Definir `EmergencyType` (enum de 12 situaciones de emergencia con
   etiquetas en español: atragantamiento, quemaduras, caídas, picaduras y
   mordeduras, convulsiones, fiebre alta, heridas sangrantes, intoxicación,
   golpe en la cabeza, alergias graves, ahogamiento, objetos en ojos/orejas/
@@ -20,17 +20,17 @@ que cubre y una línea "Hecho cuando:" verificable. Base: `spec.md` (RF/CL) y
     en verde (12 emergencias, orden estable, etiquetas en español, inventario
     cerrado).
 
-- [ ] **T-3** Definir `SeverityLevel` (enum: `urgency` / `consult`) con su
+- [x] **T-3** Definir `SeverityLevel` (enum: `urgency` / `consult`) con su
   etiqueta y guía de acción en español. Cubre: RF-5, CL-8.
   - Hecho cuando: `severity_level_test.dart` en verde (2 niveles, etiquetas y
     guía, inventario cerrado).
 
-- [ ] **T-4** Definir modelos tipados `FirstAidStep` { order, text } y
+- [x] **T-4** Definir modelos tipados `FirstAidStep` { order, text } y
   `EmergencyGuide` { emergency, ageBand, severity, steps, doNot } en
   `firstaid_step.dart` / `firstaid_guide.dart`. Cubre: RF-3, RF-4, RF-5.
   - Hecho cuando: los modelos compilan y `flutter analyze` sin hallazgos.
 
-- [ ] **T-5** Implementar `firstaid_content.dart`: contenido por
+- [x] **T-5** Implementar `firstaid_content.dart`: contenido por
   emergencia×franja y `contentFor(EmergencyType?, AgeBand?)` → `null` sin
   emergencia o sin franja; disclaimer como constante única. Cubre: RF-1..RF-5,
   CL-3, CL-8.
@@ -42,7 +42,7 @@ que cubre y una línea "Hecho cuando:" verificable. Base: `spec.md` (RF/CL) y
 
 ## Fase B — Estado efímero (presentation)
 
-- [ ] **T-6** Implementar `FirstAidController` en
+- [x] **T-6** Implementar `FirstAidController` en
   `features/firstaid/presentation/` (ChangeNotifier): emergencia y franja
   seleccionados; expone la guía vía `contentFor`. Cubre: RF-1, RF-2, RNF-3,
   CL-1, CL-2, CL-6, CL-7.
@@ -53,12 +53,12 @@ que cubre y una línea "Hecho cuando:" verificable. Base: `spec.md` (RF/CL) y
 
 ## Fase C — Presentación, l10n y arranque
 
-- [ ] **T-7** Configurar `localizationsDelegates` y `supportedLocales` en
+- [x] **T-7** Configurar `localizationsDelegates` y `supportedLocales` en
   `main.dart`; crear ARB base para strings español. Cubre: §6.
   - Hecho cuando: `flutter analyze` sin hallazgos y la app compila con locale
     español por defecto.
 
-- [ ] **T-8** Implementar `FirstAidPage` (widget) en
+- [x] **T-8** Implementar `FirstAidPage` (widget) en
   `features/firstaid/presentation/`: lista de 12 emergencias y, al elegir
   emergencia y franja, los pasos numerados + sección "qué no hacer" + indicador
   de gravedad; aviso médico siempre visible. Cubre: RF-1..RF-6, RNF-2, RNF-5,
@@ -68,14 +68,14 @@ que cubre y una línea "Hecho cuando:" verificable. Base: `spec.md` (RF/CL) y
     gravedad distinguida por etiqueta semántica; aviso médico siempre; scroll
     largo; layout ≥320 dp; etiquetas vía l10n en español).
 
-- [ ] **T-9** Conectar `FirstAidPage` como `home` temporal en `main.dart`.
+- [x] **T-9** Conectar `FirstAidPage` como `home` temporal en `main.dart`.
   Cubre: RF-1, RNF-5.
   - Hecho cuando: `flutter run` lanza la app y se ve la lista de emergencias
     desde el arranque.
 
 ## Fase D — Verificación final
 
-- [ ] **T-10** Ejecutar `flutter pub get && flutter analyze && flutter test`;
+- [x] **T-10** Ejecutar `flutter pub get && flutter analyze && flutter test`;
    corregir cualquier hallazgo con su test. Cubre: todos los RF.
   - Hecho cuando: los tres comandos terminan en exit 0/0/0.
 

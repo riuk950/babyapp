@@ -50,5 +50,14 @@
   "routineMomentNone": "Elige un momento",
   "routineSelectBandPrompt": "Elige la franja de edad del bebé",
   "routineAgeBandNone": "Ninguna seleccionada",
-  "routineSourcePrefix": "Fuente"
+  "routineSourcePrefix": "Fuente",
+
+  "firstaidAppTitle": "Primeros auxilios",
+  "firstaidSelectEmergencyPrompt": "Elige una situación de emergencia",
+  "firstaidEmergencyNone": "Elige una emergencia",
+  "firstaidSelectBandPrompt": "Elige la franja de edad del niño",
+  "firstaidAgeBandNone": "Ninguna seleccionada",
+  "firstaidWhatToDo": "Qué hacer",
+  "firstaidWhatNotToDo": "Qué NO hacer",
+  "firstaidSeverity": "Gravedad"
 }
