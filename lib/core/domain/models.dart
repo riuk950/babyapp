@@ -1,16 +1,10 @@
 // Pure domain types for the weather-to-clothing rules (spec 001).
 // This file must not import Flutter or any framework (constitution §3A).
 
-/// Life stage the child belongs to, used to adjust the recommendation.
-///
-/// Ranges follow the spec: each band includes its lower bound and excludes
-/// its upper bound: [0,3), [3,12), [12,36), [36,60] months (RF-6).
-enum AgeBand {
-  newborn0to3,
-  infant3to12,
-  toddler12to36,
-  child36to60,
-}
+// [AgeBand] is defined once in `age/age_band.dart` (single shared source,
+// spec 002 CL-3) and re-exported here so 001 keeps a stable import surface.
+import 'age/age_band.dart';
+export 'age/age_band.dart' show AgeBand;
 
 /// Failure reasons for a manually entered temperature (RF-1).
 enum ManualInputFailure {

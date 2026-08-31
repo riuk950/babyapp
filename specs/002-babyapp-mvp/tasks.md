@@ -7,24 +7,24 @@ mensajes de usuario en español (§6). Nada en `core/domain/` importa Flutter
 
 ## Fase 0 — Base compartida y lógica pura (`core/domain/`)
 
-- [ ] T1. Fuente única de franjas en `core/domain/age/age_band.dart`
+- [x] T1. Fuente única de franjas en `core/domain/age/age_band.dart`
       RF: RF-1 · CL-3 · plan §2
       Hecho cuando: define las 4 franjas con límites [0,3) [3,12) [12,36) [36,60],
       la función 001 la reutiliza sin copias, y `flutter analyze` no reporta nada.
 
-- [ ] T2. Modelo `SleepGuide` en `core/domain/sleep/sleep_guide.dart`
+- [x] T2. Modelo `SleepGuide` en `core/domain/sleep/sleep_guide.dart`
       RF: RF-2, RF-3 · plan §3
       Hecho cuando: define los campos tipados (`band`, `label`, `rangeMonths`,
       `totalHoursPerDay`, `naps`, `bedtimeSchedule`, `insufficientSleepSigns`,
       `alarmSigns`, `medicalDisclaimer`) sin importar Flutter.
 
-- [ ] T3. Contenido 4/4 en `core/domain/sleep/sleep_content.dart` +
+- [x] T3. Contenido 4/4 en `core/domain/sleep/sleep_content.dart` +
       `guideFor(AgeBand?)`
       RF: RF-1, RF-2, RF-3, RF-5 · CL-8 · plan §3
       Hecho cuando: las 4 franjas tienen completo cada campo, sin franja → `null`,
       el disclaimer está en todas, y cada término clínico lleva aclaración.
 
-- [ ] T4. Tests unitarios de `core/domain/`
+- [x] T4. Tests unitarios de `core/domain/`
       RF: RF-1, RF-2, RF-3, RF-5 · CL-3, CL-8 · plan §6
       Hecho cuando: `age_band_test` y `sleep_content_test` pasan (pertenencia en
       0/3/12/36/60; 4/4; determinismo; límites coinciden con 001).
