@@ -25,5 +25,11 @@
   "sleepNapsTitle": "Siestas",
   "sleepBedtimeTitle": "Horario orientativo",
   "sleepInsufficientSignsTitle": "Señales de sueño insuficiente",
-  "sleepAlarmSignsTitle": "Cuándo consultar al pediatra"
+  "sleepAlarmSignsTitle": "Cuándo consultar al pediatra",
+
+  "breastmilkAppTitle": "Cómo almacenar leche materna",
+  "breastmilkSelectPrompt": "Elige una sección",
+  "breastmilkBestPracticesTitle": "Mejores prácticas",
+  "breastmilkHighlightPrefix": "Aviso de seguridad",
+  "breastmilkStorageTableTitle": "Tiempos de conservación recomendados"
 }

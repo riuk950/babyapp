@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'features/sleep/presentation/l10n/app_localizations.dart';
-import 'features/sleep/presentation/sleep_controller.dart';
-import 'features/sleep/presentation/sleep_page.dart';
+import 'features/breastmilk/presentation/breastmilk_controller.dart';
+import 'features/breastmilk/presentation/breastmilk_page.dart';
+import 'features/breastmilk/presentation/l10n/app_localizations.dart';
 
 void main() {
   runApp(const BabyApp());
@@ -14,19 +14,19 @@ class BabyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Cuánto debe dormir tu hijo',
+      title: 'Cómo almacenar leche materna',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
         useMaterial3: true,
         appBarTheme: const AppBarTheme(
-          backgroundColor: Colors.indigo,
+          backgroundColor: Colors.teal,
           foregroundColor: Colors.white,
         ),
       ),
       locale: const Locale('es'),
       supportedLocales: AppLocalizations.supportedLocales,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
-      home: SleepPage(controller: SleepController()),
+      home: BreastMilkPage(controller: BreastMilkController()),
     );
   }
 }
