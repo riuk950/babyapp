@@ -31,5 +31,13 @@
   "breastmilkSelectPrompt": "Elige una sección",
   "breastmilkBestPracticesTitle": "Mejores prácticas",
   "breastmilkHighlightPrefix": "Aviso de seguridad",
-  "breastmilkStorageTableTitle": "Tiempos de conservación recomendados"
+  "breastmilkStorageTableTitle": "Tiempos de conservación recomendados",
+
+  "milestonesAppTitle": "Hitos de desarrollo",
+  "milestonesSelectPrompt": "Elige el mes del bebé (1 a 60 meses)",
+  "milestonesSearchHint": "Buscar por número o edad (p. ej., 7)",
+  "milestonesSearchNoResults": "No hay meses que coincidan con tu búsqueda",
+  "milestonesNewMilestonesTitle": "Hitos nuevos",
+  "milestonesPreviousHitLabel": "Último hito alcanzado",
+  "milestonesAlarmSignsTitle": "Señales de alarma"
 }
