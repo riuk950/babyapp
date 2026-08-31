@@ -115,12 +115,44 @@ aclaración cotidiana. Inventario cerrado de términos con aclaración (actual):
 "BPA (sustancia usada en algunos plásticos que se recomienda evitar)". Ampliar
 el inventario requiere actualizar esta spec.
 
+## Arquitectura y contratos (constitución §2, §3)
+
+Esta sección satisface los requisitos mínimos de la constitución §2 y §3 para
+esta spec.
+
+### Casos de uso (Use Cases)
+
+| Caso de uso | Flujo | RF asociado |
+|---|---|---|
+| `GetBreastMilkGuide` | Dada una sección (o sin ella), devuelve el contenido de esa sección o `null`. | RF-1, RF-2 |
+| `GetMedicalDisclaimer` | Devuelve el aviso médico (constante única siempre disponible). | RF-3 |
+
+### Contratos de repositorio (I/O y Repository Interfaces)
+
+No existe fuente de datos ni repositorio. El contenido vive como constantes en
+la capa Domain como datos tipados. No hay I/O que contratar.
+
+### Estrategia de fallos de dominio
+
+No hay fallos de dominio posibles: la entrada es la selección de una sección
+válida (enum cerrado, imposible un valor inválido). El caso "sin sección" se
+maneja en el controller como estado `null`, no como fallo de dominio.
+
+### Persistencia
+
+Declaración explícita conforme §5: **sin persistencia**. La selección de
+sección es estado efímero de sesión (app stateless); no se escribe a disco,
+preferencias ni almacenamiento local. No existe repository de persistencia ni
+data source local.
+
 ## Criterios de finalización
 
 - Todos los RF verificables y cumplidos, y los casos límite resueltos.
 - El contenido de las 4 secciones es trazable a la referencia citada y revisado.
 - El motor de contenido (sección → contenido con sus bloques destacados) cubierto por tests unitarios, incluida la cobertura 4/4 (CL-7).
 - Sin dependencias nuevas y sin persistencia.
+- Cumple §2 de la constitución: casos de uso, ausencia de repositorio justificada,
+  estrategia de fallos declarada y mecanismo de persistencia declarado.
 
 ## Dudas abiertas
 

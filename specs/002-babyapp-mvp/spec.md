@@ -113,6 +113,40 @@ Señales de alarma (consultar al pediatra):
 
 Aviso legal incluido en RF-3: la información no sustituye consejo médico profesional.
 
+## Arquitectura y contratos (constitución §2, §3)
+
+Esta sección satisface los requisitos mínimos de la constitución §2 y §3 para
+esta spec.
+
+### Casos de uso (Use Cases)
+
+| Caso de uso | Flujo | RF asociado |
+|---|---|---|
+| `GetSleepGuide` | Dada una franja (o sin ella), devuelve el contenido de patrones de sueño o `null`. | RF-1, RF-2 |
+| `GetMedicalDisclaimer` | Devuelve el aviso médico (constante única siempre disponible). | RF-3 |
+
+No hay más casos de uso porque esta función es una guía estática; la selección
+de franja (RF-1, RF-4) y el cambio de contenido (RF-4) son responsabilidad
+del controller en Presentation.
+
+### Contratos de repositorio (I/O y Repository Interfaces)
+
+No existe fuente de datos ni repositorio. El contenido vive como constantes en
+la capa Domain como datos tipados. No hay I/O que contratar.
+
+### Estrategia de fallos de dominio
+
+No hay fallos de dominio posibles: la entrada es la selección de una franja
+válida (enum cerrado, imposible un valor inválido). El caso "sin franja" se
+maneja en el controller como estado `null`, no como fallo de dominio.
+
+### Persistencia
+
+Declaración explícita conforme §5: **sin persistencia**. La selección de
+franja es estado efímero de sesión (app stateless); no se escribe a disco,
+preferencias ni almacenamiento local. No existe repository de persistencia ni
+data source local.
+
 ## Criterios de finalización
 
 - Todos los RF verificables y cumplidos, y los casos límite resueltos.
@@ -120,6 +154,8 @@ Aviso legal incluido en RF-3: la información no sustituye consejo médico profe
 - El motor de contenido (franja → contenido) cubierto por tests unitarios, incluida la cobertura 4/4 (CL-8).
 - Los tests verifican que los límites de franjas coinciden con la función 001 (fuente única).
 - Sin dependencias nuevas y sin persistencia.
+- Cumple §2 de la constitución: casos de uso, ausencia de repositorio justificada,
+  estrategia de fallos declarada y mecanismo de persistencia declarado.
 
 ## Dudas abiertas
 

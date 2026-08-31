@@ -2,8 +2,8 @@
 
 Tareas en orden de dependencia. Cada una ≤ 20–30 min. Coordinación con
 `specs/001-babyapp-mvp/spec.md` y `plan.md`. Identificadores en inglés,
-mensajes de usuario en español (principio 6). Nada en `core/` importa Flutter
-(principio 3).
+mensajes de usuario en español (§6). Nada en `core/domain/` importa Flutter
+(§3A).
 
 ## Fase 0 — Base
 
@@ -12,14 +12,14 @@ mensajes de usuario en español (principio 6). Nada en `core/` importa Flutter
       Hecho cuando: `pubspec.yaml` incluye `http` y `geolocator`, y
       `flutter pub get` sale con exit 0.
 
-- [ ] T2. Definir tipos de dominio
-      RF: RF-6, RF-7, RF-8 · plan §2 (`core/models.dart`)
+- [ ] T2. Definir tipos de dominio en `core/domain/`
+      RF: RF-6, RF-7, RF-8 · plan §2 (`core/domain/models.dart`)
       Hecho cuando: existen `AgeBand`, `ManualInputResult`,
       `TemperatureReading`, `EffectiveTemperature`, `NoticeType`,
       `ExtremeLevel` y `ClothingRecommendation`, sin importar Flutter, y
       `flutter analyze` no reporta nada en ese archivo.
 
-## Fase 1 — Lógica pura (`core/`) + tests unitarios
+## Fase 1 — Lógica pura (`core/domain/`) + tests unitarios
 
 - [ ] T3. Parser de entrada manual (formato y validación)
       RF: RF-1 · CL-1, CL-4 · plan §2, §6
@@ -52,49 +52,63 @@ mensajes de usuario en español (principio 6). Nada en `core/` importa Flutter
 
 ## Fase 2 — Efectos (`data/`) + repository
 
-- [ ] T8. Adaptador Open-Meteo (HTTP + JSON)
+- [ ] T8. Contratos de repository en `core/domain/contracts/`
+      RF: RF-2, RF-4 · plan §2
+      Hecho cuando: `WeatherRepository` y `GeoRepository` son interfaces
+      abstractas sin dependencias de framework, y `flutter analyze` sin
+      hallazgos.
+
+- [ ] T9. Adaptador Open-Meteo (HTTP + JSON) en `data/weather/`
       RF: RF-2 · CL-11 · plan §2, §3
       Hecho cuando: parsea la respuesta de ejemplo a `TemperatureReading` en
       décimas enteras y una lectura fuera de −30…50 devuelve `null`.
 
-- [ ] T9. Servicio de geolocalización
+- [ ] T10. Servicio de geolocalización en `data/geo/`
       RF: RF-2 · plan §2
-      Hecho cuando: `geo_service.dart` devuelve lat/long vía `geolocator` o un
-      `GeoFailure` tipado (denegado, no disponible), sin lógica de negocio.
+      Hecho cuando: `geolocator_service.dart` devuelve lat/long vía
+      `geolocator` o un `GeoFailure` tipado (denegado, no disponible), sin
+      lógica de negocio.
 
-- [ ] T10. WeatherRepository (orquesta geo + HTTP, clasifica fallos)
+- [ ] T11. WeatherRepository (orquesta geo + HTTP, clasifica fallos) en
+      `data/weather/`
       RF: RF-2, RF-4 · RNF-6 · plan §2, §5(8)
       Hecho cuando: con fakes del geo y del HTTP devuelve una geoTemperatura
       dentro de rango, o clasifica el fallo (permiso, red, servicio, datos
       inválidos) de forma testeada sin red real.
 
-## Fase 3 — Interfaz (`features/clothing/`)
+## Fase 3 — Presentación y arranque
 
-- [ ] T11. Controller de la pantalla (estado efímero de sesión)
+- [ ] T12. Configurar l10n en `main.dart`; crear ARB base para español.
+      RF: §6 · plan §5(11)
+      Hecho cuando: `flutter analyze` sin hallazgos y la app compila con locale
+      español por defecto.
+
+- [ ] T13. Controller de la pantalla en `features/clothing/presentation/`
       RF: RF-1(wiring), RF-5, RF-6 · CL-10, CL-12 · plan §2, §5(5,10)
       Hecho cuando: con fakes, la geo tardía actualiza la efectiva; cambiar de
       franja re-evalúa; sin franja no recomienda; muestra estado de carga; al
       volver al primer plano reintenta la consulta si antes falló.
 
-- [ ] T12. Pantalla (renderiza y delega)
-      RF: RF-1..RF-8 · RNF-2, RNF-5 · plan §2, §3 (mensajes en español)
+- [ ] T14. Pantalla (renderiza y delega) en `features/clothing/presentation/`
+      RF: RF-1..RF-8 · RNF-2, RNF-5 · §6 · plan §2, §3
       Hecho cuando: presenta campo manual, selector de franja, indicador de
       carga, recomendación, aviso de extremo sin sustituirla, y los textos
-      exactos de RF-1 y RF-4 en español.
+      exactos de RF-1 y RF-4 en español vía l10n.
 
-- [ ] T13. Arranque y tema de la app
+- [ ] T15. Arranque y tema de la app
       RF: RF-7 · RNF-5 · plan §2
       Hecho cuando: `main.dart` lanza la pantalla de clima con un tema legible
       (contraste suficiente) y sin la demo del contador.
 
 ## Fase 4 — Verificación
 
-- [ ] T14. Widget test de la pantalla
-      RF: RF-7, RF-8 · RNF-2 · principio 6 · plan §6
+- [ ] T16. Widget test de la pantalla
+      RF: RF-7, RF-8 · RNF-2 · §6 · plan §6
       Hecho cuando: el widget test verifica recomendación, aviso sin
-      reemplazarla, errores RF-1 y layout ≥320 dp con textos en español.
+      reemplazarla, errores RF-1 y layout ≥320 dp con textos vía l10n en
+      español.
 
-- [ ] T15. Gate final
-      RF: todos · principio 4 · plan §4
+- [ ] T17. Gate final
+      RF: todos · §4 · plan §4
       Hecho cuando: `flutter pub get && flutter analyze && flutter test`
       devuelven 0/0/0 y toda la cobertura de RF del plan §7 está verde.

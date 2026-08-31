@@ -145,12 +145,70 @@ Ajustes por franja de edad:
 - 1–3 años: ropa base.
 - 4–5 años: ropa base (puede quitarse la capa opcional de los rangos fríos).
 
+## Arquitectura y contratos (constitución §2, §3)
+
+Esta sección satisface los requisitos mínimos de la constitución §2 y §3 para
+esta spec.
+
+### Casos de uso (Use Cases)
+
+| Caso de uso | Flujo | RF asociado |
+|---|---|---|
+| `ParseManualTemperature` | La usuaria introduce texto → el sistema valida, parsea y devuelve `ManualInputResult` (ok con décimas enteras o error tipado). | RF-1, CL-1, CL-4 |
+| `FetchGeoTemperature` | Al abrir o volver al primer plano, el sistema pide permiso GPS y consulta Open-Meteo → devuelve `GeoTemperatureResult` (ok o error tipado). | RF-2, CL-6, CL-11, CL-12 |
+| `ComputeEffectiveTemperature` | Dadas fuentes disponibles, calcula promedio (o fallback), redondea half-up → `TemperatureResult` (valor + source + notice). | RF-3, RF-4, RF-5, RF-8, CL-8 |
+| `GetClothingRecommendation` | Dada temperatura efectiva y franja, devuelve la recomendación de vestimenta y el estado de aviso extremo. | RF-6, RF-7, RF-8 |
+| `EvaluateExtremeNotice` | Evalúa la temperatura efectiva contra los umbrales ≤0 °C / ≥30 °C → `ExtremeNotice` (none / cold / heat). | RF-8, CL-3 |
+
+### Contratos de repositorio (I/O y Repository Interfaces)
+
+La capa Domain define interfaces; la capa Data las implementa con las
+dependencias aprobadas (HTTP, GPS).
+
+```dart
+// domain/contracts/weather_repository.dart
+abstract class WeatherRepository {
+  Future<GeoTemperatureResult> fetchCurrentTemperature();
+}
+
+// domain/contracts/geo_repository.dart
+abstract class GeoRepository {
+  Future<GeoPosition> getCurrentPosition();
+}
+```
+
+`GeoTemperatureResult` y `GeoPosition` viven en `domain/entities/`. Los DTOs
+que mapean las respuestas de Open-Meteo y Geolocator viven en `data/`.
+
+### Estrategia de fallos de dominio
+
+Todos los fallos se representan como tipos de dominio, nunca como excepciones
+genéricas:
+
+```dart
+// domain/failures/failures.dart
+enum GeoFailure { permissionDenied, noService, timeout, invalidData }
+enum ManualInputFailure { empty, notNumeric, tooManyDecimals, outOfRange }
+```
+
+Los casos de uso devuelven `Result<T>` (Success o Failure). Las UI leen el
+estado de error y muestran el mensaje apropiado en español.
+
+### Persistencia
+
+Declaración explícita conforme §5: **sin persistencia**. La temperatura
+obtenida es estado efímero de sesión; no se escribe a disco, preferencias ni
+almacenamiento local. La selección de franja (RF-6) tampoco persiste (app
+stateless). No existe repository de persistencia ni data source local.
+
 ## Criterios de finalización
 
 - Todos los RF verificables y cumplidos, y los casos límite resueltos.
 - La regla de recomendación (franja × temperatura efectiva) y el redondeo half-up (incluidos negativos) cubiertos por tests unitarios.
-- Los fallbacks de RF-4 (geo no disponible y manual no válida) cubiertos por tests.
+- Los fallbacks de RF-4 (geo no disponible y manual no válida) cubierto por tests.
 - Sin dependencias adicionales a las aprobadas en esta spec y en la constitución.
+- Cumple §2 de la constitución: casos de uso, contratos de repositorio,
+  estrategia de fallos de dominio y mecanismo de persistencia declarado.
 
 ## Dudas abiertas
 
