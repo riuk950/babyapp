@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'features/alerts/presentation/alert_controller.dart';
-import 'features/alerts/presentation/alert_page.dart';
-import 'features/alerts/presentation/l10n/app_localizations.dart';
+import 'features/routine/presentation/l10n/app_localizations.dart'
+    as routine_l10n;
+import 'features/routine/presentation/routine_controller.dart';
+import 'features/routine/presentation/routine_page.dart';
 
 void main() {
   runApp(const BabyApp());
@@ -24,9 +25,10 @@ class BabyApp extends StatelessWidget {
         ),
       ),
       locale: const Locale('es'),
-      supportedLocales: AppLocalizations.supportedLocales,
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      home: AlertPage(controller: AlertController()),
+      supportedLocales: routine_l10n.AppLocalizations.supportedLocales,
+      localizationsDelegates:
+          routine_l10n.AppLocalizations.localizationsDelegates,
+      home: RoutinePage(controller: RoutineController()),
     );
   }
 }

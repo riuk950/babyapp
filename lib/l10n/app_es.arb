@@ -43,5 +43,12 @@
 
   "alertsAppTitle": "Señales de alerta",
   "alertsSelectPrompt": "Elige la franja de edad del bebé",
-  "alertsAgeBandNone": "Ninguna seleccionada"
+  "alertsAgeBandNone": "Ninguna seleccionada",
+
+  "routineAppTitle": "Tips de rutina diaria",
+  "routineSelectMomentPrompt": "Elige un momento del día",
+  "routineMomentNone": "Elige un momento",
+  "routineSelectBandPrompt": "Elige la franja de edad del bebé",
+  "routineAgeBandNone": "Ninguna seleccionada",
+  "routineSourcePrefix": "Fuente"
 }
